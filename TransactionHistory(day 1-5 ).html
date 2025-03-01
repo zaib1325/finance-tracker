@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Dev Project</title>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <script src="https://kit.fontawesome.com/0f79dcbbc8.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* Hide scrollbar but keep scrolling functionality */
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+            /* Hide scrollbar in Chrome, Safari */
+        }
+
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            /* Hide scrollbar in IE/Edge */
+            scrollbar-width: none;
+            /* Hide scrollbar in Firefox */
+        }
+
+        .dark-mode {
+            background-color: #1E1B18;
+            color: white;
+        }
+    </style>
+</head>
+
+<body class="m-0 p-0 font-sans bg-[#F5F5F7] flex flex-col min-h-screen">
+
+    <!-- Header -->
+    <div
+        class="w-full bg-[#705C53] bg-gradient-to-br from-[#705C53] to-[#978177] py-5 px-3 mb-20 flex items-center justify-between shadow-lg relative">
+        <!-- Title with Gradient & Shadow -->
+        <div class="w-full lg:w-1/3 flex justify-start items-center">
+            <h1 class="text-3xl font-extrabold uppercase text-[#EDDFE0] tracking-wide">
+                Transaction <br><span class="text-[#C6A395]">History</span>
+            </h1>
+        </div>
+        <i class="fa-solid fa-burger text-white text-2xl md:!hidden lg:!hidden "></i>
+
+
+        <!-- Navigation Links -->
+        <div class="w-1/3 hidden lg:inline-block lg:w-1/2">
+            <ul class="flex items-center space-x-6 text-white text-lg mt-16">
+                <li class="cursor-pointer relative group">
+                    Home
+                    <span
+                        class="absolute left-1/2 bottom-0 h-[2px] bg-white w-0 transition-all duration-300 group-hover:w-full group-hover:left-0"></span>
+                </li>
+                <li class="cursor-pointer relative group">
+                    Services
+                    <span
+                        class="absolute left-1/2 bottom-0 h-[2px] bg-white w-0 transition-all duration-300 group-hover:w-full group-hover:left-0"></span>
+                </li>
+                <li class="cursor-pointer relative group">
+                    Transaction History
+                    <span
+                        class="absolute left-1/2 bottom-0 h-[2px] bg-white w-0 transition-all duration-300 group-hover:w-full group-hover:left-0"></span>
+                </li>
+                <li class="cursor-pointer relative group">
+                    <a href="aboutUs.html">About Us</a>
+                    <span
+                        class="absolute left-1/2 bottom-0 h-[2px] bg-white w-0 transition-all duration-300 group-hover:w-full group-hover:left-0"></span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Icons Section with Glassmorphism -->
+        <div class="w-1/3 hidden md:inline-block md:w-fit">
+
+            <div class="bg-white/10 backdrop-blur-md px-6 py-3 rounded-lg flex items-center space-x-4 shadow-md">
+                <i class="fa-solid fa-ghost text-white cursor-pointer text-2xl hover:scale-110 transition"></i>
+                <i class="fa-solid fa-user-secret text-white cursor-pointer text-2xl hover:scale-110 transition"></i>
+                <i class="fa-solid fa-cloud-arrow-up text-white cursor-pointer text-2xl hover:scale-110 transition"></i>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Search Bar -->
+    <div class="w-[90%] m-auto flex sm:space-x-5">
+        <div class="relative w-full">
+            <input type="text" id="search" placeholder="Search..."
+                class="w-full px-5 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-[#6E6963]"
+                onclick="document.getElementById('hide').classList.add('opacity-0', 'invisible'); document.getElementById('show').classList.remove('opacity-0', 'invisible','rotate-90'); document.getElementById('show').classList.add('rotate-0')"
+                onblur="document.getElementById('hide').classList.remove('opacity-0','invisible');document.getElementById('show').classList.add('opacity-0', 'invisible', 'rotate-90');   document.getElementById('show').classList.remove('rotate-0');">
+
+            <!-- Search Icon (Initially Visible) -->
+            <i id="hide"
+                class="fas fa-search absolute right-5 top-5 transform -translate-y-1/2 text-gray-500 transition-all duration-300"></i>
+
+            <!-- Arrow Icon (Initially Hidden) -->
+            <i id="show"
+                class="fa-solid fa-arrow-right absolute right-5 top-5 transform -translate-y-1/2 opacity-0 invisible transition-all duration-300 rotate-90"></i>
+        </div>
+
+        <div class="w-auto flex items-center gap-3">
+            <button
+                    id="button2" class="hidden sm:inline-block sm:py-2 sm:px-5 md:inline-block lg:inline-block xl:inline-block bg-[#705C53] text-white rounded-lg shadow-md hover:shadow-lg hover:bg-[#5d4a44] transition cursor-pointer">Search</button>
+            <button onclick="myFunc()" 
+                    id="button1" class="bg-[#705C53] flex items-center gap-1 text-white px-3 py-2 rounded-full shadow-md hover:shadow-lg hover:bg-[#5d4a44] transition cursor-pointer ">Dark
+                <i class="fa-solid fa-moon text-lg"></i></button>
+        </div>
+    </div>
+
+    <!-- Transaction History Field -->
+    <div class="w-[85%] m-auto mt-8 p-5 bg-[#EDDFE0] rounded-lg shadow-md overflow-x-auto scrollbar-hide">
+        <div class="w-max md:w-full sm:min-w-[600px]">
+            <div class="grid grid-cols-5 bg-[#EDDFE0] text-[#705C53]">
+
+                <!-- Table Header -->
+                <div class="border-b bg-[#705C53] text-white text-lg font-medium py-2 px-4">Select</div>
+                <div class="border-b bg-[#705C53] text-white text-lg font-medium py-2 px-4">Transactions</div>
+                <div class="border-b bg-[#705C53] text-white text-lg font-medium py-2 px-4">History 1</div>
+                <div class="border-b bg-[#705C53] text-white text-lg font-medium py-2 px-4">History 2</div>
+                <div class="border-b bg-[#705C53] text-white text-lg font-medium py-2 px-4">History 3</div>
+
+                <!-- Table Rows -->
+                <div class="border-b border-[#B7B7B7] p-3 flex justify-center"><input type="checkbox"></div>
+                <div class="border-b border-[#B7B7B7] p-3">Transaction 1</div>
+                <div class="border-b border-[#B7B7B7] p-3">History 1</div>
+                <div class="border-b border-[#B7B7B7] p-3">History 2</div>
+                <div class="border-b border-[#B7B7B7] p-3">History 3</div>
+
+                <div class="border-b border-[#B7B7B7] p-3 flex justify-center"><input type="checkbox"></div>
+                <div class="border-b border-[#B7B7B7] p-3">Transaction 2</div>
+                <div class="border-b border-[#B7B7B7] p-3">History 1</div>
+                <div class="border-b border-[#B7B7B7] p-3">History 2</div>
+                <div class="border-b border-[#B7B7B7] p-3">History 3</div>
+
+                <div class="border-b border-[#B7B7B7] p-3 flex justify-center"><input type="checkbox"></div>
+                <div class="border-b border-[#B7B7B7] p-3">Transaction 3</div>
+                <div class="border-b border-[#B7B7B7] p-3">History 1</div>
+                <div class="border-b border-[#B7B7B7] p-3">History 2</div>
+                <div class="border-b border-[#B7B7B7] p-3">History 3</div>
+
+                <div class="border-b border-[#B7B7B7] p-3 flex justify-center"><input type="checkbox"></div>
+                <div class="border-b border-[#B7B7B7] p-3">Transaction 4</div>
+                <div class="border-b border-[#B7B7B7] p-3">History 1</div>
+                <div class="border-b border-[#B7B7B7] p-3">History 2</div>
+                <div class="border-b border-[#B7B7B7] p-3">History 3</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Summary-Section -->
+    <div class="w-[85%] m-auto mt-8 flex space-x-5 text-center bg-slate-100 rounded-md shadow-lg p-8">
+        <div class="w-1/3 border-r border-gray-200">
+            <h1 class="text-[#705C53] text-lg font-medium">Total Balance</h1>
+            <strong class="text-[#705C53] text-xl font-bold">$12000</strong>
+        </div>
+        <div class="w-1/3 border-r border-gray-200">
+            <h1 class="text-[#705C53] text-lg font-medium">Total Income</h1>
+            <strong class="text-green-500 text-xl font-bold">$5000</strong>
+        </div>
+        <div class="w-1/3">
+            <h1 class="text-[#705C53] text-lg font-medium">Total Expense</h1>
+            <strong class="text-red-600 text-xl font-bold">$3500</strong>
+        </div>
+    </div>
+
+    <!-- Form with Reviews -->
+    <div class="w-[90%] m-auto my-10 md:flex md:space-x-5">
+        <div class="w-full mt-10 mb-5">
+            <form class="bg-[#EDDFE0] rounded-lg shadow-md p-6 ">
+                <h2 class="text-2xl font-semibold text-[#705C53] mb-4">Add Transaction</h2>
+
+                <div class="mb-4">
+                    <label class="block text-[#705C53] font-medium">Description</label>
+                    <textarea
+                        class="w-full bg-[#F5F5F7] p-3 border border-[#B7B7B7] rounded-md focus:ring focus:ring-[#705C53] focus:outline-none"
+                        rows="3" placeholder="Enter Description">
+                    </textarea>
+                </div>
+
+                <div class="mb-4">
+                    <label class="block text-[#705C53] font-medium">Amount</label>
+                    <input type="number"
+                        class="w-full bg-[#F5F5F7] p-3 border border-[#B7B7B7] rounded-md focus:ring focus:ring-[#705C53] focus:outline-none"
+                        placeholder="Enter Amount">
+                </div>
+
+                <button
+                    id="button3" class="w-full bg-[#705C53] text-white py-2 rounded-md font-medium text-lg shadow-md hover:shadow-lg hover:bg-[#5d4a44] transition cursor-pointer">
+                    Submit
+                </button>
+            </form>
+        </div>
+
+        <div class="w-full mt-10 mb-5 p-6 bg-[#EDDFE0] rounded-lg shadow-md">
+            <h1 class="text-2xl font-semibold text-[#705C53]">Review Your Thoughts</h1>
+            <ol class="space-y-4 mt-6 list-decimal pl-6 text-[#6E6963]">
+                <li class="hover:text-[#705C53] transition-all duration-300">How would you rate your overall experience
+                    with our service?</li>
+                <li class="hover:text-[#705C53] transition-all duration-300">What did you like the most about our
+                    product/service?</li>
+                <li class="hover:text-[#705C53] transition-all duration-300">How can we improve to serve you better?
+                </li>
+                <li class="hover:text-[#705C53] transition-all duration-300">How long have you been using our
+                    product/service?</li>
+                <li class="hover:text-[#705C53] transition-all duration-300">Would you recommend us to a friend or
+                    colleague? Why or why not?</li>
+                <li class="hover:text-[#705C53] transition-all duration-300">What did you like the most about our
+                    product/service?</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- footer-section -->
+    <div class="w-full px-10 py-5 bg-gradient-to-br from-[#5a4b44] to-[#e3baaa] text-[#EDDFE0]">
+        <div class="flex flex-wrap justify-between">
+            <!-- Logo / Brand Section -->
+            <div class="w-full md:w-1/3 flex items-center justify-center md:justify-start">
+                <h1 class="text-2xl font-bold text-[#C6A395] uppercase">ClosetNow</h1>
+            </div>
+
+            <!-- Links Section -->
+            <div class="w-full md:w-2/3 mt-5 md:mt-0">
+                <div class="flex flex-wrap justify-center md:justify-end space-x-10 text-[#C6A395]">
+                    <ul class="space-y-2">
+                        <li class="text-lg font-semibold text-white">About</li>
+                        <li class="hover:text-white transition cursor-pointer">Mission</li>
+                        <li class="hover:text-white transition cursor-pointer">How it works</li>
+                        <li class="hover:text-white transition cursor-pointer">User testimonials</li>
+                    </ul>
+                    <ul class="space-y-2">
+                        <li class="text-lg font-semibold text-white">Support</li>
+                        <li class="hover:text-white transition cursor-pointer">Help</li>
+                        <li class="hover:text-white transition cursor-pointer">Report</li>
+                        <li class="hover:text-white transition cursor-pointer">FAQs</li>
+                    </ul>
+                    <ul class="space-y-2">
+                        <li class="text-lg font-semibold text-white">Social</li>
+                        <li class="hover:text-white transition cursor-pointer">Join Our Community</li>
+                        <li class="hover:text-white transition cursor-pointer">Follow us for Updates</li>
+                        <li class="hover:text-white transition cursor-pointer">Feedback</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Bottom Section -->
+        <div
+            class="w-full flex flex-col md:flex-row justify-between items-center mt-12 cursor-pointer border-t border-[#C6A395] pt-2">
+            <span class="text-sm md:text-base">&copy; 2024 ClosetNow. All rights reserved.</span>
+            <button onclick="window.scrollTo({top: 0, behavior: 'smooth'});"
+                id="button4"  class="bg-[#C6A395] text-[#5a4b44] px-4 py-2 rounded-md hover:bg-[#705C53] transition">
+                Back to Top
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function myFunc() {
+            let getElement = document.body;
+            let change = document.getElementById('search');
+
+            getElement.classList.toggle('dark-mode');
+
+            let button = document.getElementById('button1');
+            let button2 = document.getElementById('button2');
+            let button3 = document.getElementById('button3');
+            let button4 = document.getElementById('button4');
+
+            if (getElement.classList.contains('dark-mode')) {
+
+                // ChangeText-onclick
+                button.innerHTML = 'Light <i class="fa-solid fa-moon text-lg">';
+
+                // changeStyling-of-buttonText
+                button.classList.remove('text-white'); button.classList.add('text-black');
+
+                // changeColor-of-placeholder'sText
+                change.classList.toggle('placeholder-white');
+
+                // changeShade-onHover
+                button2.classList.add('hover:bg-[#C6A395]');
+                button.classList.add('hover:bg-[#E1D5CD]');
+
+
+            } else {
+                button.innerHTML = 'Dark <i class="fa-solid fa-moon text-lg">'
+                button.classList.remove('text-black'); button.classList.add('text-white');
+                change.classList.toggle('placeholder-white');
+            }
+        }
+    </script>
+</body>
+
+</html>
