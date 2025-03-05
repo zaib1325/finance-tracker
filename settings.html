@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/0f79dcbbc8.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="flex w-full h-lvh">
+
+        <!-- rightSection_for_menuHeadings -->
+        <div class="w-1/4 pl-10 pt-10 border-r border-gray-300 space-y-5 bg-[#846d62] text-white">
+            <button class="w-full text-start flex items-center gap-3"> <i
+                    class="fa-solid fa-chevron-right overflow-hidden"></i> <span
+                    class="border-b border-white/0 hover:border-b hover:border-white transition duration-200">Profile</span>
+            </button>
+            <button class="w-full text-start flex items-center gap-3"> <i class="fa-solid fa-chevron-right"></i> <span
+                    class="border-b border-white/0 hover:border-b hover:border-white transition duration-200">App
+                    preference</span> </button>
+            <button class="w-full text-start flex items-center gap-3"> <i class="fa-solid fa-chevron-right"></i> <span
+                    class="border-b border-white/0 hover:border-b hover:border-white transition duration-200">Notifications</span>
+            </button>
+            <button class="w-full text-start flex items-center gap-3"> <i class="fa-solid fa-chevron-right"></i> <span
+                    class="border-b border-white/0 hover:border-b hover:border-white transition duration-200">Security</span>
+            </button>
+            <button class="w-full text-start flex items-center gap-3"> <i class="fa-solid fa-chevron-right"></i> <span
+                    class="border-b border-white/0 hover:border-b hover:border-white transition duration-200">Danger</span>
+            </button>
+        </div>
+
+        <!-- leftSection_for_Description -->
+        <div class="w-full bg-[#EDDFE0] p-10">
+
+            <!-- profile-section -->
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h2 class="text-xl font-semibold text-[#705C53] mb-4">Profile Information</h2>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="text-[#705C53] font-medium">First Name</label>
+                        <input type="text" class="w-full p-2 border border-[#B7B7B7] rounded-md bg-[#F5F5F7]">
+                    </div>
+                    <div>
+                        <label class="text-[#705C53] font-medium">Last Name</label>
+                        <input type="text" class="w-full p-2 border border-[#B7B7B7] rounded-md bg-[#F5F5F7]">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="mt-4">
+                        <label class="text-[#705C53] font-medium">Full Name</label>
+                        <input type="text" class="w-full p-2 border border-[#B7B7B7] rounded-md bg-[#F5F5F7]">
+                    </div>
+                    <div class="mt-4">
+                        <label class="text-[#705C53] font-medium">Email</label>
+                        <input type="email" class="w-full p-2 border border-[#B7B7B7] rounded-md bg-[#F5F5F7]">
+                    </div>
+                </div>
+
+                <button class="mt-5 px-6 py-2 bg-[#705C53] text-white rounded-lg shadow-md hover:bg-[#5e4a41]">Save
+                    Changes</button>
+            </div>
+
+            <!-- appPreference -->
+            <div class="mt-10 bg-white p-6 rounded-lg shadow-md">
+                <h2 class="text-xl font-semibold text-[#705C53] mb-4">App Preferences</h2>
+                <div class="flex gap-5">
+                    <div>
+                        <input type="checkbox" id="light-mode">
+                        <label class="text-[#705C53] font-medium">Light Mode</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="dark-mode">
+                        <label class="text-[#705C53] font-medium">Dark Mode</label>
+                    </div>
+                </div>
+
+                <!-- Dropdown Menu -->
+                <div class="mt-6">
+                    <h3 class="text-[#705C53] font-semibold">Preferred Currency</h3>
+                    <div class="relative inline-block w-52">
+                        <button onclick="toggleDropdown()"
+                            class="w-full bg-[#F5F5F7] p-2 flex items-center justify-between border border-[#B7B7B7] rounded-md">
+                            <span id="placholder">US dollar (USDT)</span>
+                            <i id="carot" class="fa-solid fa-caret-up rotate-180"></i>
+                        </button>
+                        <div id="dropContent"
+                            class="hidden absolute z-10 mt-1 w-full bg-white border border-[#B7B7B7] shadow-md rounded-md p-2">
+                            <a class="block p-2 hover:bg-[#F5F5F7] cursor-pointer"
+                                onclick="selectText('US dollar (USDT)')">US dollar (USDT)</a>
+                            <a class="block p-2 hover:bg-[#F5F5F7] cursor-pointer"
+                                onclick="selectText('Euro (EUR)')">Euro (EUR)</a>
+                            <a class="block p-2 hover:bg-[#F5F5F7] cursor-pointer"
+                                onclick="selectText('Rupee (PKR)')">Rupee (PKR)</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleDropdown() {
+            let accDropdown = document.getElementById('dropContent');
+            let rotateCarot = document.getElementById('carot');
+
+            accDropdown.classList.toggle('hidden');
+            rotateCarot.classList.toggle('rotate-0');
+        }
+
+        function selectText(selectedText) {
+            document.getElementById('placholder').innerText = selectedText;
+            document.getElementById('dropContent').classList.add('hidden');
+            document.getElementById('carot').classList.add('rotate-180');
+        }
+    </script>
+</body>
+
+</html>
